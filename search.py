@@ -1,6 +1,8 @@
 from Bio.Blast import NCBIWWW
 import xml.etree.ElementTree as ET
 
+Threshold = 0.85
+
 def request_database(seq):
     result_handle = NCBIWWW.qblast("blastn", "nt", seq, entrez_query='txid2[ORGN]')
     root = ET.fromstring(result_handle.read())
@@ -8,8 +10,6 @@ def request_database(seq):
     print(child.text)
 
 def main():
-    Threshold = 0.85
-
     file1 = open('reads_for_analysis.fastq', 'r')
     lines = file1.readlines()
 
